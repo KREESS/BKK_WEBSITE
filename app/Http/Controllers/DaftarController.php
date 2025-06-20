@@ -31,7 +31,7 @@ class DaftarController extends Controller
 
         // Simpan ke database kalau kamu sudah punya model Lamaran
         // Di sini saya contohkan hanya menyimpan ke log
-        \Log::info('Lamaran baru diterima:', [
+        Log::info('Lamaran baru diterima:', [
             'nama' => $request->nama,
             'email' => $request->email,
             'nohp' => $request->nohp,

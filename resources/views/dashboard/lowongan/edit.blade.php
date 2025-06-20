@@ -73,6 +73,23 @@
                                             </div>
                                         @enderror
                                     </div> 
+
+                                    <div class="mb-3">
+                                        <label for="pembayaran" class="form-label">Biaya</label>
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            class="form-control @error('pembayaran') is-invalid @enderror"
+                                            id="pembayaran"
+                                            name="pembayaran"
+                                            value="{{ old('pembayaran', $lowongan->pembayaran) }}"
+                                        >
+                                        @error('pembayaran')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <div class="col-md-4">

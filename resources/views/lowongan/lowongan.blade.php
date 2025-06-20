@@ -34,10 +34,11 @@
                                     @endif
                                 </h6>
                             </div>
+                            {{-- bagian ini --}}
                             <div class="card-footer">
                                 <a href="/lowongan/{{ $lowongan->slug }}" class="text-decoration-none btn btn-sm btn-primary mt-3">Detail</a>
                                 @if ($diff->days > 0)
-                                    <a href="/form-daftar" class="btn btn-sm btn-success mt-3 text-decoration-none">Daftar</a>
+                                    <a href="/login" class="btn btn-sm btn-success mt-3 text-decoration-none">Daftar</a>
                                 @else
                                     <button href="/" class="btn btn-sm btn-danger mt-3 text-decoration-none">Lowongan Ditutup</button>
                                 @endif

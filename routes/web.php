@@ -47,6 +47,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
+Route::group(['middleware'  => 'checkRole:pendaftar'], function () {
+    // Route::get('/dashboard/profil', [DashboardProfilController::class, 'index']);
+    // Route::put('/dashboard/profil', [DashboardProfilController::class, 'update']);
+});
+
 Route::group(['middleware'  => 'checkRole:admin,pendaftar'], function () {
     Route::get('/dashboard/profil', [DashboardProfilController::class, 'index']);
     Route::put('/dashboard/profil', [DashboardProfilController::class, 'update']);
@@ -83,6 +88,6 @@ Route::get('/daftar/{slug}', [DaftarController::class, 'create']);
 Route::post('/daftar', [DaftarController::class, 'store']);
 
 
-Route::get('/dashboard/daftar', function() {
+Route::get('/dashboard/daftar', function () {
     return view('pendaftar');
 });

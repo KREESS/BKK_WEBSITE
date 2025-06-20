@@ -14,9 +14,11 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Gambar</th>
                                         <th>Judul</th>
                                         <th>Perusahaan</th>
                                         <th>Posisi</th>
+                                        <th>Biaya</th>
                                         <th>Batas Waktu</th>
                                         <th>Opsi</th>
                                     </tr>
@@ -25,9 +27,17 @@
                                     @foreach ($lowongans as $lowongan)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                @if ($lowongan->gambar)
+                                                    <img src="{{ asset('storage/' . $lowongan->gambar) }}" alt="Gambar Lowongan" style="max-width: 100px; height: auto;">
+                                                @else
+                                                    <span class="text-muted">Tidak ada gambar</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $lowongan->judul }}</td>
                                             <td>{{ $lowongan->perusahaan }}</td>
                                             <td>{{ $lowongan->posisi }}</td>
+                                            <td>{{ $lowongan->pembayaran }}</td>
                                             <td>{{ $lowongan->batas_waktu }}</td>
                                             <td>
                                                 <a href="/dashboard/lowongan/{{ $lowongan->slug }}" class="btn btn-success mb-2"><i class="bi bi-eye-fill"></i></a>

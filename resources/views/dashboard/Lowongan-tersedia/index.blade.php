@@ -16,6 +16,7 @@
                                         <th>Gambar</th>
                                         <th>Perusahaan</th>
                                         <th>Posisi</th>
+                                        <th>Biaya</th>
                                         <th>Batas Waktu</th>
                                         <th>Daftar</th>
                                     </tr>
@@ -28,9 +29,10 @@
                                     @endphp
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><img src="{{ asset('storage/'. $lowongan->gambar) }}" alt="gambar-perusahaan" style="width: 250px"; height="200px"></td>
+                                            <td><img src="{{ asset('storage/'. $lowongan->gambar) }}" alt="gambar-perusahaan" style="max-width: 100px; height: auto;" height="200px"></td>
                                             <td>{{ $lowongan->perusahaan }}</td>
                                             <td>{{ $lowongan->posisi }}</td>
+                                            <td>{{ $lowongan->pembayaran }}</td>
                                             <td>{{ $lowongan->batas_waktu }}</td>
                                             <td>
                                                 {{-- Mengecek apakah user yang sedang login sudah mendaftar di lowongan ini atau belum --}}

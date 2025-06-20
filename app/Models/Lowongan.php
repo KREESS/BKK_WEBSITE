@@ -28,7 +28,7 @@ class Lowongan extends Model
     {
         return 'slug';
     }
-    
+
     public function sluggable(): array
     {
         return [
@@ -36,5 +36,11 @@ class Lowongan extends Model
                 'source' => 'judul'
             ]
         ];
+    }
+
+    // Optional: bisa tambahkan accessor buat format tampilan uang
+    public function getPembayaranFormatAttribute()
+    {
+        return 'Rp ' . number_format($this->pembayaran, 0, ',', '.');
     }
 }

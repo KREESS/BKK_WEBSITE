@@ -21,7 +21,7 @@ class DashboardLowonganController extends Controller
      */
     public function index()
     {
-        return view('dashboard.lowongan.index',[
+        return view('dashboard.lowongan.index', [
             'users' => Auth::user(),
             'lowongans' => Lowongan::all()
         ]);
@@ -54,17 +54,18 @@ class DashboardLowonganController extends Controller
             'posisi'        => 'required',
             'batas_waktu'   => 'required',
             'persyaratan'   => 'required',
+            'pembayaran'   => 'required',
             'gambar'        => 'image|file'
         ]);
 
-        
+
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
             $fileName = $file->getClientOriginalName();
-            Storage::disk('public')->put('gambar-lowongan/'.$fileName, file_get_contents($file));
-            $validated['gambar'] = 'gambar-lowongan/'.$fileName;
+            Storage::disk('public')->put('gambar-lowongan/' . $fileName, file_get_contents($file));
+            $validated['gambar'] = 'gambar-lowongan/' . $fileName;
         }
-        
+
         $validated['user_id'] = auth()->user()->id;
         $validated['excerpt'] = Str::limit(strip_tags($request->persyaratan), 100);
 
@@ -114,26 +115,26 @@ class DashboardLowonganController extends Controller
             'posisi'        => 'required',
             'batas_waktu'   => 'required',
             'persyaratan'   => 'required',
+            'pembayaran'   => 'required',
             'gambar'        => 'image|file'
         ];
 
-        if($request->slug != $lowongan->slug){
+        if ($request->slug != $lowongan->slug) {
             $rules['slug'] = 'required|unique:lowongans';
-        }
-        else {
+        } else {
             $rules['slug'] = 'required';
         }
 
         $validated = $request->validate($rules);
 
-        if($request->hasFile('gambar')){
-            if($lowongan->gambar){
+        if ($request->hasFile('gambar')) {
+            if ($lowongan->gambar) {
                 Storage::delete($lowongan->gambar);
             }
             $file = $request->file('gambar');
             $fileName = $file->getClientOriginalName();
-            Storage::disk('public')->put('gambar-lowongan/'.$fileName, file_get_contents($file));
-            $validated['gambar'] = 'gambar-lowongan/'.$fileName;
+            Storage::disk('public')->put('gambar-lowongan/' . $fileName, file_get_contents($file));
+            $validated['gambar'] = 'gambar-lowongan/' . $fileName;
         }
 
         $validated['user_id'] = auth()->user()->id;
@@ -142,7 +143,7 @@ class DashboardLowonganController extends Controller
             ->update($validated);
 
         Alert::success('Berhasil !', 'Berhasil Mengedit Lowongan');
-        return redirect('/dashboard/lowongan');    
+        return redirect('/dashboard/lowongan');
     }
 
     /**
@@ -152,7 +153,7 @@ class DashboardLowonganController extends Controller
      */
     public function destroy(Lowongan $lowongan)
     {
-        if($lowongan->gambar){
+        if ($lowongan->gambar) {
             Storage::delete($lowongan->gambar);
         }
 
