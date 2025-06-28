@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('perusahaan');
             $table->string('posisi');
             $table->text('persyaratan');
+            $table->decimal('pembayaran', 10, 0);
             $table->dateTime('batas_waktu');
             $table->foreignId('user_id');
             $table->timestamps();

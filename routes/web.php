@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardLowonganController;
 use App\Http\Controllers\DashboardLamaranController;
 use App\Http\Controllers\DashboardLowonganTersediaController;
 use App\Http\Controllers\DashboardProfilController;
+use App\Http\Controllers\MidtransController;
 use App\Http\Middleware\CheckRole;
 use App\Models\Informasi;
 use GuzzleHttp\Middleware;
@@ -75,6 +76,15 @@ Route::group(['middleware' => 'checkRole:pendaftar'], function () {
     Route::get('/dashboard/lowongan-tersedia/', [DashboardLowonganTersediaController::class, 'index']);
     Route::get('/dashboard/lowongan-tersedia/daftar/{lowongan:slug}', [DashboardLowonganTersediaController::class, 'daftar']);
     Route::POST('/dashboard/lowongan-tersedia', [DashboardLowonganTersediaController::class, 'store'])->name('store');
+    Route::get('/dashboard/lowongan-tersedia/pembayaran/{lowongan:slug}', [DashboardLowonganTersediaController::class, 'pembayaran'])->name('lowongan.pembayaran');
+    Route::post('/dashboard/lowongan-tersedia/bayar/{lowongan:slug}', [MidtransController::class, 'pay'])->name('midtrans.pay');
+    Route::post('/midtrans/pay/{lowongan:slug}', [MidtransController::class, 'pay'])->name('midtrans.pay');
+    // web.php (jika pakai GET untuk testing manual)
+    Route::post('/api/midtrans/callback', [MidtransController::class, 'callback']);
+    // web.php
+    Route::post('/midtrans/manual-update', [MidtransController::class, 'manualUpdate'])
+        ->name('midtrans.manual.update');
+
 
     Route::get('/dashboard/lamaran/', [DashboardLamaranController::class, 'index']);
     Route::get('/dashboard/lamaran/edit/{lowongan:slug}/', [DashboardLamaranController::class, 'edit']);

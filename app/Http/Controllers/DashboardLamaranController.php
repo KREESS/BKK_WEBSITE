@@ -22,13 +22,18 @@ class DashboardLamaranController extends Controller
 
     public function edit(Pendaftar $pendaftar, Lowongan $lowongan)
     {
-        $pendaftar = Pendaftar::where('user_id', auth()->user()->id)->first();
-        return view('/dashboard/lamaran/edit', [
-            'users'     => Auth::user(),
+        // Ambil pendaftar berdasarkan user DAN lowongan
+        $pendaftar = Pendaftar::where('user_id', auth()->id())
+            ->where('lowongan_id', $lowongan->id)
+            ->firstOrFail();
+
+        return view('dashboard.lamaran.edit', [
+            'users'     => auth()->user(),
             'pendaftar' => $pendaftar,
             'lowongan'  => $lowongan
         ]);
     }
+
 
     public function cetak(Pendaftar $pendaftar, Lowongan $lowongan)
     {
@@ -72,15 +77,15 @@ class DashboardLamaranController extends Controller
 
         $validated = $request->validate($rules);
         $validated['user_id'] = auth()->user()->id;
-        
+
         $kodePendaftaran = $pendaftar->kode_pendaftaran;
         $pendaftar->kode_pendaftaran = $kodePendaftaran;
 
         Pendaftar::where('user_id', auth()->user()->id)->first()
             ->update($validated);
-        
+
         Alert::success('Berhasil !', 'Berhasil Mengedit Data Lamaran Anda');
-        return redirect('/dashboard/lamaran');    
+        return redirect('/dashboard/lamaran');
     }
 
     public function destroy($id)
@@ -91,6 +96,4 @@ class DashboardLamaranController extends Controller
         Alert::success('Berhasil', 'Data Pendaftar berhasil dihapus');
         return redirect('/dashboard/lamaran');
     }
-
-
 }

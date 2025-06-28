@@ -31,13 +31,15 @@
                             </span>
 
                             @if ($pendaftar->status_pembayaran == 'belum_lunas')
-                                <a href="#" class="btn btn-sm btn-primary shadow-sm">
-                                    <i class="bi bi-wallet2 me-1"></i> Lanjut Bayar
-                                </a>
+                                <form action="{{ route('midtrans.pay', $lowongan->slug) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-primary shadow-sm">
+                                        <i class="bi bi-wallet2 me-1"></i> Lanjut Bayar
+                                    </button>
+                                </form>
                             @endif
                         </div>
                     </div>
-
 
                     <form action="{{ route('update-lamaran') }}" method="POST" enctype="multipart/form-data">
                         @csrf 

@@ -30,7 +30,7 @@ class DashboardLowonganTersediaController extends Controller
 
     // Proses create atau tambah pendaftaran
     public function store(Request $request)
-    {   
+    {
         $validated = $request->validate([
             'nama'           => 'required',
             'jurusan'        => 'required',
@@ -46,6 +46,17 @@ class DashboardLowonganTersediaController extends Controller
 
         Pendaftar::create($validated);
         Alert::success('Berhasil', 'Berhasil Mendaftar');
-        return redirect('/dashboard/lowongan-tersedia/');
+        // Redirect ke halaman pembayaran
+        $lowongan = Lowongan::findOrFail($request->lowongan_id);
+        return redirect()->route('lowongan.pembayaran', $lowongan->slug);
+    }
+
+    // Mengarahkan ke formulir untuk mendaftar
+    public function pembayaran(Lowongan $lowongan)
+    {
+        return view('dashboard.lowongan-tersedia.pembayaran', [
+            'users' => Auth::user(),
+            'lowongan' => $lowongan
+        ]);
     }
 }

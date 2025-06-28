@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('jurusan');
             $table->string('asal_sekolah');
             $table->string('jenis_kelamin');
+            // Tambahkan status_pembayaran
+            $table->enum('status_pembayaran', ['lunas', 'belum_lunas'])->default('belum_lunas');
             $table->foreignId('user_id');
             $table->foreignId('lowongan_id');
             $table->timestamps();

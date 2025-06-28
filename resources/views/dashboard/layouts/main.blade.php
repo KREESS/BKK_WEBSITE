@@ -97,7 +97,7 @@
                         </li>
                     @else
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="/dashboard/daftar">
+                            <a class="sidebar-link" href="/dashboard">
                                 <i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
                             </a>
                         </li>
