@@ -7,7 +7,6 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                    
                         <div class="table-responsive">
                             <table id="table_id" class="display">
                                 <thead>
