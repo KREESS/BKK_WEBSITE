@@ -16,6 +16,4 @@ class IndexController extends Controller
             'titleHero' => "Sistem informasi BKK"
         ]);
     }
-
-    
 }

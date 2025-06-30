@@ -21,10 +21,19 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected function redirectTo() {
+    protected function redirectTo()
+    {
+        $user = auth()->user();
+
+        // Jika siswa, arahkan ke dashboard-siswa
+        if ($user->role_id == 3) {
+            return '/dashboard-siswa'; // bisa diganti route() jika ingin pakai named route
+        }
+
+        // Default untuk pendaftar (role_id = 2)
         return '/dashboard';
     }
-    
+
 
     /**
      * Where to redirect users after login.

@@ -29,7 +29,18 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected function redirectTo()
+    {
+        $user = auth()->user();
+
+        // Jika siswa, arahkan ke dashboard-siswa
+        if ($user->role_id == 3) {
+            return '/dashboard-siswa'; // bisa diganti route() jika ingin pakai named route
+        }
+
+        // Default untuk pendaftar (role_id = 2)
+        return '/dashboard';
+    }
 
     /**
      * Create a new controller instance.
@@ -52,7 +63,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name'      => ['required', 'string', 'max:255'],
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role_id'   => ['required'],
+            'role_id'   => ['required', 'in:2,3'],
             'password'  => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }

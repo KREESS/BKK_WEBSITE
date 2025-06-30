@@ -13,8 +13,18 @@ class DashboardProfilController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+
+        // Kirim variabel layout berdasarkan role
+        if ($user->role->role == 'siswa') {
+            $layout = 'siswa.layouts.app';
+        } else {
+            $layout = 'dashboard.layouts.main';
+        }
+
         return view('dashboard.profil.index', [
-            'users' => Auth::user(),
+            'users' => $user,
+            'layout' => $layout
         ]);
     }
 
@@ -27,20 +37,20 @@ class DashboardProfilController extends Controller
             'foto'  => 'image|mimes:jpg,jpeg,png'
         ];
 
-        if($request->filled('password')){
+        if ($request->filled('password')) {
             $rules['password']  = 'required|min:8';
         }
 
         $validated = $request->validate($rules);
 
-        if($request->hasFile('foto')){
-            if($user->foto){
+        if ($request->hasFile('foto')) {
+            if ($user->foto) {
                 Storage::delete($user->foto);
             }
             $file = $request->file('foto');
             $fileName = $file->getClientOriginalName();
-            Storage::disk('public')->put('foto/'.$fileName, file_get_contents($file));
-            $validated['foto'] = 'foto/'.$fileName;
+            Storage::disk('public')->put('foto/' . $fileName, file_get_contents($file));
+            $validated['foto'] = 'foto/' . $fileName;
         }
 
         if ($request->filled('password')) {
@@ -53,6 +63,6 @@ class DashboardProfilController extends Controller
             ->update($validated);
 
         Alert::success('Berhasil !', 'Berhasil Memperbarui Profil');
-        return redirect('/dashboard/profil');   
+        return redirect('/dashboard/profil');
     }
 }

@@ -15,12 +15,15 @@
                   <li><a href="/">Home</a></li>
                   <li><a href="/lowongan/">Lowongan</a></li>
                   <li><a href="/informasi/">Informasi</a></li>
-                  @auth
-                      <li><a class="get-a-quote" href="/dashboard">Dashboard</a></li>
-                  @else
-                      <li><a class="get-a-quote" href="/login">Masuk/Daftar</a></li>
-                  @endauth
-
+                @auth
+                    @if (auth()->user()->role?->name === 'siswa')
+                        <li><a class="get-a-quote" href="{{ route('dashboard.siswa') }}">Dashboard</a></li>
+                    @else
+                        <li><a class="get-a-quote" href="/dashboard">Dashboard</a></li>
+                    @endif
+                @else
+                    <li><a class="get-a-quote" href="/login">Masuk/Daftar</a></li>
+                @endauth
               </ul>
           </nav><!-- .navbar -->
 
