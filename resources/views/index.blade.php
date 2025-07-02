@@ -42,9 +42,10 @@
             </div>
           </div>
 
-          <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-            <img src="assets/img/hero.png" class="img-fluid mb-3 mb-lg-0" alt="">
-          </div>
+<div class="col-lg-5 order-1 order-lg-2 hero-img d-flex align-items-center justify-content-end pe-4" data-aos="zoom-out">
+  <img src="assets/img/logo_smk1.png" class="img-fluid mb-3 mb-lg-0" alt="">
+</div>
+
 
         </div>
       </div>
