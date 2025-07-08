@@ -40,4 +40,26 @@ class DashboardController extends Controller
             'totalBelum'        => $totalBelum,
         ]);
     }
+
+    public function liveSearch(Request $request)
+    {
+        $query = $request->get('query');
+
+        $lowongans = Lowongan::where('judul', 'like', "%{$query}%")->get()->map(function ($item) {
+            $end = \Carbon\Carbon::parse($item->batas_waktu);
+            $now = \Carbon\Carbon::now();
+            $diff = $end->diff($now);
+
+            return [
+                'judul'        => $item->judul,
+                'slug'         => $item->slug,
+                'gambar'       => $item->gambar,
+                'diff_days'    => $diff->days,
+                'diff_hours'   => $diff->h,
+            ];
+        });
+
+        return response()->json($lowongans);
+    }
+
 }

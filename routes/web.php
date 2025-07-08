@@ -49,6 +49,8 @@ Route::get('/informasi/{informasi:slug}', [InformasiController::class, 'show']);
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/lowongan/search', [DashboardController::class, 'liveSearch'])->name('lowongan.search');
+
 
 Route::group(['middleware'  => 'checkRole:siswa'], function () {
     Route::get('/dashboard-siswa', [DashboardSiswaController::class, 'index'])->name('dashboard.siswa');
