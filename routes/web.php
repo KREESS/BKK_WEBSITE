@@ -74,6 +74,8 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
 
     Route::get('/dashboard/informasi/checkSlug', [DashboardInformasiController::class, 'checkSlug']);
     Route::resource('/dashboard/informasi', DashboardInformasiController::class);
+    Route::get('/dashboard/minat-siswa', [DashboardInformasiController::class, 'minatSiswa'])->name('minat-siswa');
+    Route::delete('/dashboard/minat-siswa/{id}', [DashboardInformasiController::class, 'destroyMinat'])->name('minat-siswa.destroy');
 });
 
 

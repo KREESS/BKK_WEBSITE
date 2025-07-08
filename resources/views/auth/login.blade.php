@@ -1,5 +1,3 @@
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -28,17 +26,18 @@
 
               <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                  <label class="form-label" for="password">Masukkan Password</label>
-              </div>
-                <div class="input-group input-group-merge">
-                  <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" aria-describedby="password"/>
-                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                    @enderror
-                </div>
+                    <label class="form-label" for="password">Masukkan Password</label>
+                    <a href="{{ route('password.request') }}" class="small text-primary">Lupa Password?</a>
+                  </div>
+                  <div class="input-group input-group-merge">
+                    <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" aria-describedby="password"/>
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                      @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <p>{{ $message }}</p>
+                          </span>
+                      @enderror
+                  </div>
               </div>
 
               <div class="mb-3">
@@ -59,6 +58,3 @@
     </div>
   </div>
 @endsection
-    
-
-   

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Models\MinatSiswa;
+
 
 class DashboardInformasiController extends Controller
 {
@@ -45,16 +47,16 @@ class DashboardInformasiController extends Controller
             'file'          => 'mimes:xlsx,xls,doc,docx,pdf'
         ]);
 
-        if($request->hasFile('file')){
+        if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
-            Storage::disk('public')->put('file-informasi/' .$fileName, file_get_contents($file));
-            $validated['file'] = 'file-informasi/' .$fileName;
+            Storage::disk('public')->put('file-informasi/' . $fileName, file_get_contents($file));
+            $validated['file'] = 'file-informasi/' . $fileName;
         }
 
         $validated['user_id'] = auth()->user()->id;
         $validated['excerpt'] = Str::limit(strip_tags($request->deskripsi), 50);
-    
+
         Informasi::create($validated);
         Alert::success('Berhasil', 'informasi berhasil ditambahkan!');
         return redirect('/dashboard/informasi');
@@ -93,23 +95,22 @@ class DashboardInformasiController extends Controller
             'file'          => 'mimes:xlsx,xls,doc,docx,pdf'
         ];
 
-        if($request->slug != $informasi->slug){
+        if ($request->slug != $informasi->slug) {
             $rules['slug'] = 'required|unique:informasis';
-        }
-        else {
+        } else {
             $rules['slug'] = 'required';
         }
 
         $validated = $request->validate($rules);
 
-        if($request->hasFile('file')){
-            if($informasi->file){
+        if ($request->hasFile('file')) {
+            if ($informasi->file) {
                 Storage::delete($informasi->file);
             }
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
-            Storage::disk('public')->put('file-informasi/' .$fileName, file_get_contents($file));
-            $validated['file'] = 'file-informasi/' .$fileName;
+            Storage::disk('public')->put('file-informasi/' . $fileName, file_get_contents($file));
+            $validated['file'] = 'file-informasi/' . $fileName;
         }
 
         $validated['user_id'] = auth()->user()->id;
@@ -118,8 +119,8 @@ class DashboardInformasiController extends Controller
         Informasi::where('id', $informasi->id)
             ->update($validated);
 
-            Alert::success('Berhasil !', 'Berhasil Mengedit Informasi');
-            return redirect('/dashboard/informasi');   
+        Alert::success('Berhasil !', 'Berhasil Mengedit Informasi');
+        return redirect('/dashboard/informasi');
     }
 
     /**
@@ -127,7 +128,7 @@ class DashboardInformasiController extends Controller
      */
     public function destroy(Informasi $informasi)
     {
-        if($informasi->file){
+        if ($informasi->file) {
             Storage::delete($informasi->file);
         }
 
@@ -140,5 +141,20 @@ class DashboardInformasiController extends Controller
     {
         $slug = SlugService::createSlug(Informasi::class, 'slug', $request->judul);
         return response()->json(['slug' => $slug]);
+    }
+
+
+    public function minatSiswa()
+    {
+        $data = MinatSiswa::with('user')->latest()->get();
+        $user = Auth::user(); // ✅ tambahkan ini
+
+        return view('dashboard.minat-siswa.minat', compact('data', 'user'));
+    }
+
+    public function destroyMinat($id)
+    {
+        MinatSiswa::findOrFail($id)->delete();
+        return redirect()->route('minat-siswa')->with('success', 'Data berhasil dihapus!');
     }
 }
