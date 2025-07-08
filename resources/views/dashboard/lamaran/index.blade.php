@@ -4,13 +4,13 @@
 <div class="container-fluid p-0">
     <h1 class="h3">Data Lamaran Anda</h1>
 
-    <div class="card mb-3">
+    {{-- <div class="card mb-3">
         <div class="card-body">
             <strong>Tekan Tombol</strong> &nbsp;
             <button class="btn btn-success"><i class="bi bi-printer"></i></button> &nbsp;
-            <strong>Untuk Mencetak Kartu Peserta</strong> 
+            <strong>Untuk Mencetak Kartu Peserta</strong>
         </div>
-    </div>
+    </div> --}}
 
     <div class="row">
         <div class="col">

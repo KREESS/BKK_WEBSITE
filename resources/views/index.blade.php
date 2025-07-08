@@ -2,7 +2,7 @@
 
 
 @section('container')
-  
+
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="hero d-flex align-items-center">
       <div class="container">
@@ -58,7 +58,7 @@
               <span>Lowongan Terbaru</span>
               <h2>Lowongan Terbaru</h2>
           </div>
-  
+
           <div class="row">
               @foreach ($newLowongan as $lowongan)
                 @php

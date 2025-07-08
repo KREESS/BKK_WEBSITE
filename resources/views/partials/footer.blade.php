@@ -30,11 +30,11 @@
         <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
           <h4>Kontak Kami</h4>
           <p>
-            Karangmulyo, Purwodadi <br>
-            Purworejo, Jawa Tengah<br>
+            Aris, Asep <br>
+            Indramayu, Jawa Barat<br>
             Indonesia <br><br>
-            <strong>Phone:</strong> +62-8122-9248-179<br>
-            <strong>Email:</strong> purnomodwi174@gmail.com<br>
+            <strong>Phone:</strong> +62-821-1411-1336<br>
+            <strong>Email:</strong> smkn1lelea@gmail.com<br>
           </p>
 
         </div>

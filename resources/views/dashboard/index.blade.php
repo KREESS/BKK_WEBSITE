@@ -55,7 +55,8 @@
         <div class="card text-white" style="background-color: #0d3b66;">
             <div class="card-body">
                 <h5 class="card-title">Total Lamaran</h5>
-                <p class="fs-3">{{ $totalLamaran }}</p>
+                {{-- <p class="fs-3">{{ $totalLamaran }}</p> --}}
+                <p class="fs-3">PPPPP</p>
             </div>
         </div>
     </div>
