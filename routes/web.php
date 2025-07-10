@@ -37,6 +37,8 @@ use App\Http\Controllers\DashboardSiswaController;
 
 // Landing Page
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/lowongan/search', [DashboardController::class, 'search']);
+
 
 Route::get('/lowongan', [LowonganController::class, 'lowongan']);
 Route::get('/lowongan/{lowongan:slug}', [LowonganController::class, 'show']);
@@ -49,7 +51,6 @@ Route::get('/informasi/{informasi:slug}', [InformasiController::class, 'show']);
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/lowongan/search', [DashboardController::class, 'liveSearch'])->name('lowongan.search');
 
 
 Route::group(['middleware'  => 'checkRole:siswa'], function () {

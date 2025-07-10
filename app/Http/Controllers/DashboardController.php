@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Lowongan;
 use App\Models\Informasi;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Pendaftar;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
@@ -17,6 +16,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
+        // Jika admin
         if ($user->role->role === 'admin') {
             return view('dashboard.index', [
                 'users'             => $user,
@@ -26,8 +26,8 @@ class DashboardController extends Controller
             ]);
         }
 
+        // Jika user biasa
         $pendaftar = Pendaftar::where('user_id', $user->id)->with('lowongan')->get();
-
         $totalLamaran = $pendaftar->count();
         $totalLunas = $pendaftar->where('status_pembayaran', 'lunas')->count();
         $totalBelum = $totalLamaran - $totalLunas;
@@ -41,25 +41,18 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function liveSearch(Request $request)
+    /**
+     * Untuk pencarian live yang me-render ulang seluruh halaman (hero + lowongan)
+     */
+    public function search(Request $request)
     {
-        $query = $request->get('query');
+        $query = $request->query('query');
 
-        $lowongans = Lowongan::where('judul', 'like', "%{$query}%")->get()->map(function ($item) {
-            $end = \Carbon\Carbon::parse($item->batas_waktu);
-            $now = \Carbon\Carbon::now();
-            $diff = $end->diff($now);
+        $lowongans = Lowongan::where('judul', 'like', '%' . $query . '%')->get();
 
-            return [
-                'judul'        => $item->judul,
-                'slug'         => $item->slug,
-                'gambar'       => $item->gambar,
-                'diff_days'    => $diff->days,
-                'diff_hours'   => $diff->h,
-            ];
-        });
-
-        return response()->json($lowongans);
+        return view('partials.halaman_lowongan', [
+            'titleHero' => 'Hasil Pencarian: ' . $query,
+            'newLowongan' => $lowongans
+        ]);
     }
-
 }

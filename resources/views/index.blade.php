@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
+<div id="container"> {{-- Tambahkan ID ini sebagai pembungkus konten --}}
 <section id="hero" class="hero d-flex align-items-center">
   <div class="container">
     <div class="row gy-4 d-flex justify-content-between">
@@ -10,6 +11,7 @@
           Sistem Informasi BKK (Bursa Kerja Khusus) merupakan sebuah tempat untuk alumni dan non-alumni untuk mendapatkan pekerjaan
         </p>
 
+        {{-- INI LIVE SEARCHNYA --}}
         <form id="formSearch" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
           <input type="text" id="searchLowongan" class="form-control" placeholder="Cari Lowongan...">
           <button type="submit" class="btn btn-primary">Search</button>
@@ -88,71 +90,56 @@
     </div>
   </div>
 </section>
+</div> {{-- Penutup #container --}}
+
+        {{-- INI LIVE SEARCHNYA --}}
+        <form id="formSearch" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+          <input type="text" id="searchLowongan" class="form-control" placeholder="Cari Lowongan...">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
 
 {{-- SCRIPT LIVE SEARCH --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function () {
-  function searchLowongan(keyword) {
-    $.ajax({
+  $(document).ready(function () {
+    function searchLowongan(keyword) {
+      $.ajax({
         url: "{{ url('/lowongan/search') }}",
-      type: "GET",
-      data: { query: keyword },
-      success: function (data) {
-        $('#listLowongan').html('');
-
-        if(data.length > 0){
-          data.forEach(function(lowongan){
-            let sisa = lowongan.diff_days > 0
-              ? `Sisa Waktu: ${lowongan.diff_days} hari, ${lowongan.diff_hours} jam`
-              : 'Pendaftaran Di Tutup';
-
-            let daftar = lowongan.diff_days > 0
-              ? `<a href="/dashboard" class="btn btn-sm btn-success mt-3">Daftar</a>`
-              : `<button class="btn btn-sm btn-danger mt-3" disabled>Lowongan Ditutup</button>`;
-
-            $('#listLowongan').append(`
-              <div class="col-md-4 mb-5">
-                <div class="card d-flex flex-column justify-content-between">
-                  <img src="/storage/${lowongan.gambar}" class="card-img-top" alt="${lowongan.judul}">
-                  <div class="card-body mt-auto">
-                    <h5 class="card-title">${lowongan.judul}</h5>
-                    <h6 class="card-text text-danger">${sisa}</h6>
-                  </div>
-                  <div class="card-footer">
-                    <a href="/lowongan/${lowongan.slug}" class="btn btn-sm btn-primary mt-3">Detail</a>
-                    ${daftar}
-                  </div>
-                </div>
-              </div>
-            `);
-          });
-        } else {
-          $('#listLowongan').html('<div class="col-12"><div class="alert alert-warning text-center">Lowongan tidak ditemukan.</div></div>');
+        type: "GET",
+        data: { query: keyword },
+        success: function (html) {
+          $('#container').html(html); // Replace konten dengan hasil
+          $('html, body').animate({
+            scrollTop: $('#container').offset().top
+          }, 500);
+        },
+        error: function () {
+          alert('Terjadi kesalahan saat memuat hasil.');
         }
+      });
+    }
 
-        // Scroll ke bagian #service
-        $('html, body').animate({
-          scrollTop: $('#service').offset().top - 50
-        }, 600);
+    // Submit form search
+    $('#formSearch').on('submit', function (e) {
+      e.preventDefault();
+      let keyword = $('#searchLowongan').val().trim();
+      if (keyword.length > 0) {
+        searchLowongan(keyword);
       }
     });
-  }
 
-  // Saat submit form (klik tombol search)
-  $('#formSearch').on('submit', function (e) {
-    e.preventDefault();
-    let keyword = $('#searchLowongan').val().trim();
-    searchLowongan(keyword);
+    // Ketik langsung (live)
+    $('#searchLowongan').on('keyup', function () {
+      let keyword = $(this).val().trim();
+      if (keyword.length > 1) {
+        searchLowongan(keyword);
+      } else if (keyword.length === 0) {
+        location.reload(); // Kalau kosong, reload halaman awal
+      }
+    });
   });
-
-  // Saat ketik langsung (auto search)
-  $('#searchLowongan').on('keyup', function () {
-    let keyword = $(this).val().trim();
-    if (keyword.length >= 2 || keyword.length === 0) {
-      searchLowongan(keyword);
-    }
-  });
-});
 </script>
+
+
+
 @endsection
