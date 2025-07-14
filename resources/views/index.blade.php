@@ -11,7 +11,7 @@
           Sistem Informasi BKK (Bursa Kerja Khusus) merupakan sebuah tempat untuk alumni dan non-alumni untuk mendapatkan pekerjaan
         </p>
 
-        {{-- INI LIVE SEARCHNYA --}}
+        {{-- FORM PENCARIAN --}}
         <form id="formSearch" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
           <input type="text" id="searchLowongan" class="form-control" placeholder="Cari Lowongan...">
           <button type="submit" class="btn btn-primary">Search</button>
@@ -119,22 +119,12 @@
       });
     }
 
-    // Submit form search
+    // ✅ Hanya ketika tombol submit (enter atau klik Search)
     $('#formSearch').on('submit', function (e) {
       e.preventDefault();
       let keyword = $('#searchLowongan').val().trim();
       if (keyword.length > 0) {
         searchLowongan(keyword);
-      }
-    });
-
-    // Ketik langsung (live)
-    $('#searchLowongan').on('keyup', function () {
-      let keyword = $(this).val().trim();
-      if (keyword.length > 1) {
-        searchLowongan(keyword);
-      } else if (keyword.length === 0) {
-        location.reload(); // Kalau kosong, reload halaman awal
       }
     });
   });
