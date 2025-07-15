@@ -21,7 +21,7 @@ class DataPendaftarController extends Controller
         ]);
     }
 
-    // Untuk menampilkan Data Pelamar 
+    // Untuk menampilkan Data Pelamar
     public function pendaftar(Lowongan $lowongan)
     {
         return view('dashboard.pendaftar.list', [
@@ -30,23 +30,23 @@ class DataPendaftarController extends Controller
         ]);
     }
 
-    public function printPdf(Lowongan $lowongan)
-    {
-        $logoBKKPath    = storage_path('/app/public/logo/LogoBKK.jpeg');
-        $logoBKK        = base64_encode(file_get_contents($logoBKKPath));
+    // public function printPdf(Lowongan $lowongan)
+    // {
+    //     $logoBKKPath    = storage_path('/app/public/logo/LogoBKK.jpeg');
+    //     $logoBKK        = base64_encode(file_get_contents($logoBKKPath));
 
-        $logoSekolahPath    = storage_path('/app/public/logo/LogoSekolah.jpeg');
-        $logoSekolah        = base64_encode(file_get_contents($logoSekolahPath));
+    //     $logoSekolahPath    = storage_path('/app/public/logo/LogoSekolah.jpeg');
+    //     $logoSekolah        = base64_encode(file_get_contents($logoSekolahPath));
 
-        $pdf = PDF::loadView('dashboard.pendaftar.print-pdf', [
-            'users'         => Auth::user(),
-            'lowongan'      => $lowongan,
-            'logoBKK'       => $logoBKK,
-            'logoSekolah'   => $logoSekolah,
-        ]);
+    //     $pdf = PDF::loadView('dashboard.pendaftar.print-pdf', [
+    //         'users'         => Auth::user(),
+    //         'lowongan'      => $lowongan,
+    //         'logoBKK'       => $logoBKK,
+    //         'logoSekolah'   => $logoSekolah,
+    //     ]);
 
-        return $pdf->stream('data-pendaftar.pdf');
-    }
+    //     return $pdf->stream('data-pendaftar.pdf');
+    // }
 
     public function exportexcel(Request $request, $lowongan_id)
     {

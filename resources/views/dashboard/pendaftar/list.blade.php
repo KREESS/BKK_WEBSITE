@@ -3,8 +3,7 @@
 @section('container')
     <div class="container-fluid p-0">
         <h1 class="h3">Data Pendaftar {{ $lowongan->perusahaan }}</h1>
-        <a href="/dashboard/pendaftar/" type="button" class="btn btn-secondary mb-3"><i class="bi bi-arrow-left"></i> Kembali</a>
-        <a href="/dashboard/pendaftar/print-pdf/{{ $lowongan->slug }}" type="button" class="btn btn-danger mb-3 float-end"><i class="bi bi-filetype-pdf"></i> Print Pdf</a>
+
         <div class="row">
             <div class="col">
                 <div class="card">
