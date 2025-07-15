@@ -37,13 +37,13 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="/dashboard/lamaran/cetak/{{ $list->lowongan->slug }}" target="_blank" class="btn btn-success btn-sm mb-1">
+                                            {{-- <a href="/dashboard/lamaran/cetak/{{ $list->lowongan->slug }}" target="_blank" class="btn btn-success btn-sm mb-1">
                                                 <i class="bi bi-printer"></i>
-                                            </a>
-                                            <a href="/dashboard/lamaran/edit/{{ $list->lowongan->slug }}" class="btn btn-warning btn-sm mb-1">
+                                            </a> --}}
+                                            <a href="/lamaran/edit/{{ $list->lowongan->slug }}" class="btn btn-warning btn-sm mb-1">
                                                 <i class="bi bi-pencil-fill"></i>
                                             </a>
-                                            <form id="{{ $list->id }}" action="/dashboard/lamaran/{{ $list->id }}" method="POST" class="d-inline">
+                                            <form id="{{ $list->id }}" action="/lamaran/{{ $list->id }}" method="POST" class="d-inline">
                                                 @method('delete')
                                                 @csrf
                                                 <div class="btn btn-danger btn-sm swal-confirm" data-form="{{ $list->id }}">

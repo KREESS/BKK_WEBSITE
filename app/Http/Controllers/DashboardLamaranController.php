@@ -35,35 +35,35 @@ class DashboardLamaranController extends Controller
     }
 
 
-    public function cetak(Pendaftar $pendaftar, Lowongan $lowongan)
-    {
-        $pendaftar = Pendaftar::where('user_id', auth()->user()->id)->first();
+    // public function cetak(Pendaftar $pendaftar, Lowongan $lowongan)
+    // {
+    //     $pendaftar = Pendaftar::where('user_id', auth()->user()->id)->first();
 
-        $logoBKKPath    = storage_path('/app/public/logo/LogoBKK.jpeg');
-        $logoBKK        = base64_encode(file_get_contents($logoBKKPath));
+    //     $logoBKKPath    = storage_path('/app/public/logo/LogoBKK.jpeg');
+    //     $logoBKK        = base64_encode(file_get_contents($logoBKKPath));
 
-        $logoSekolahPath    = storage_path('/app/public/logo/LogoSekolah.jpeg');
-        $logoSekolah        = base64_encode(file_get_contents($logoSekolahPath));
+    //     $logoSekolahPath    = storage_path('/app/public/logo/LogoSekolah.jpeg');
+    //     $logoSekolah        = base64_encode(file_get_contents($logoSekolahPath));
 
-        $user = auth()->user();
-        if ($user->foto) {
-            $fotoPesertaPath = storage_path('app/public/' . $user->foto);
-        } else {
-            $fotoPesertaPath = storage_path('app/public/foto/user.png');
-        }
-        $fotoPeserta       = base64_encode(file_get_contents($fotoPesertaPath));
+    //     $user = auth()->user();
+    //     if ($user->foto) {
+    //         $fotoPesertaPath = storage_path('app/public/' . $user->foto);
+    //     } else {
+    //         $fotoPesertaPath = storage_path('app/public/foto/user.png');
+    //     }
+    //     $fotoPeserta       = base64_encode(file_get_contents($fotoPesertaPath));
 
-        $pdf = PDF::loadview('dashboard.lamaran.cetak', [
-            'users'         => Auth::user(),
-            'pendaftar'     => $pendaftar,
-            'lowongan'      => $lowongan,
-            'logoBKK'       => $logoBKK,
-            'logoSekolah'   => $logoSekolah,
-            'fotoPeserta'   => $fotoPeserta
-        ]);
+    //     $pdf = PDF::loadview('dashboard.lamaran.cetak', [
+    //         'users'         => Auth::user(),
+    //         'pendaftar'     => $pendaftar,
+    //         'lowongan'      => $lowongan,
+    //         'logoBKK'       => $logoBKK,
+    //         'logoSekolah'   => $logoSekolah,
+    //         'fotoPeserta'   => $fotoPeserta
+    //     ]);
 
-        return $pdf->stream('kartu-peserta.pdf');
-    }
+    //     return $pdf->stream('kartu-peserta.pdf');
+    // }
 
     public function update(Request $request, Pendaftar $pendaftar)
     {

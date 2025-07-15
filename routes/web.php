@@ -62,8 +62,8 @@ Route::group(['middleware'  => 'checkRole:siswa'], function () {
 });
 
 Route::group(['middleware'  => 'checkRole:admin,pendaftar,siswa'], function () {
-    Route::get('/dashboard/profil', [DashboardProfilController::class, 'index'])->name('dashboard.profil');
-    Route::put('/dashboard/profil', [DashboardProfilController::class, 'update']);
+    Route::get('/profil', [DashboardProfilController::class, 'index'])->name('dashboard.profil');
+    Route::put('/profil', [DashboardProfilController::class, 'update']);
 });
 
 Route::group(['middleware' => 'checkRole:admin'], function () {
@@ -96,11 +96,11 @@ Route::group(['middleware' => 'checkRole:pendaftar'], function () {
         ->name('midtrans.manual.update');
 
 
-    Route::get('/dashboard/lamaran/', [DashboardLamaranController::class, 'index']);
-    Route::get('/dashboard/lamaran/edit/{lowongan:slug}/', [DashboardLamaranController::class, 'edit']);
-    Route::post('/dashboard/lamaran/', [DashboardLamaranController::class, 'update'])->name('update-lamaran');
-    Route::delete('/dashboard/lamaran/{id}', [DashboardLamaranController::class, 'destroy']);
-    Route::get('/dashboard/lamaran/cetak/{lowongan:slug}', [DashboardLamaranController::class, 'cetak']);
+    Route::get('/lamaran', [DashboardLamaranController::class, 'index']);
+    Route::get('/lamaran/edit/{lowongan:slug}/', [DashboardLamaranController::class, 'edit']);
+    Route::post('/lamaran', [DashboardLamaranController::class, 'update'])->name('update-lamaran');
+    Route::delete('/lamaran/{id}', [DashboardLamaranController::class, 'destroy']);
+    Route::get('/lamaran/cetak/{lowongan:slug}', [DashboardLamaranController::class, 'cetak']);
 });
 
 //form pendaftaran

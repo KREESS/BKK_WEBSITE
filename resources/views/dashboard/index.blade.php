@@ -56,7 +56,7 @@
             <div class="card-body">
                 <h5 class="card-title">Total Lamaran</h5>
                 {{-- <p class="fs-3">{{ $totalLamaran }}</p> --}}
-                <p class="fs-3">PPPPP</p>
+                <p class="fs-3">{{ $totalLamaran }}</p>
             </div>
         </div>
     </div>

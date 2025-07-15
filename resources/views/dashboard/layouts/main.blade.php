@@ -101,53 +101,54 @@
                             </a>
                         </li>
                     @else
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="/dashboard">
-                                <i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
-                            </a>
-                        </li>
+                    <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="/dashboard">
+                            <i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
+                        </a>
+                    </li>
 
-                        <li class="sidebar-header">
-                            Menu Utama
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="/dashboard/lowongan-tersedia/">
-                                <i class="bi bi-buildings"></i> <span class="align-middle">Perusahaan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="/dashboard/lamaran/">
-                                <i class="bi bi-book"></i> <span class="align-middle">Lamaran Anda</span>
-                            </a>
-                        </li>
+                    <li class="sidebar-header">Menu Utama</li>
 
-                        <li class="sidebar-header">
-                            Lainnya
-                        </li>
-                        <a class="sidebar-link" href="/dashboard/profil/">
+                    <li class="sidebar-item {{ request()->is('dashboard/lowongan-tersedia*') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="/dashboard/lowongan-tersedia/">
+                            <i class="bi bi-buildings"></i> <span class="align-middle">Perusahaan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {{ request()->is('/lamaran*') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="/lamaran">
+                            <i class="bi bi-book"></i> <span class="align-middle">Lamaran Anda</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">Lainnya</li>
+
+                    <li class="sidebar-item {{ request()->is('profil*') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="/profil">
                             <i class="bi bi-book"></i> <span class="align-middle">Profil</span>
                         </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-								Swal.fire({
-									title: 'Konfirmasi Keluar',
-									text: 'Apakah Anda yakin ingin keluar?',
-									icon: 'warning',
-									showCancelButton: true,
-									confirmButtonColor: '#3085d6',
-									cancelButtonColor: '#d33',
-									confirmButtonText: 'Ya, Keluar!'
-								}).then((result) => {
-									if (result.isConfirmed) {
-										document.getElementById('logout-form').submit();
-									}
-								});">
+                    </li>
 
-                                <i class="bi bi-box-arrow-right"></i> <span>Keluar</span>
-                            </a>
-                        </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            Swal.fire({
+                                title: 'Konfirmasi Keluar',
+                                text: 'Apakah Anda yakin ingin keluar?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, Keluar!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    document.getElementById('logout-form').submit();
+                                }
+                            });">
+                            <i class="bi bi-box-arrow-right"></i> <span>Keluar</span>
+                        </a>
+                    </li>
+
                     @endif
             </div>
         </nav>
