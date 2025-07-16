@@ -33,7 +33,7 @@
                         text: 'Terima kasih, pembayaran Anda telah diterima.',
                         confirmButtonColor: '#28a745'
                     }).then(() => {
-                        window.location.href = "/dashboard/lamaran/";
+                        window.location.href = "/lamaran";
                     });
                 })
                 .catch(error => {
@@ -52,7 +52,7 @@
                     text: 'Silakan selesaikan pembayaran Anda.',
                     confirmButtonColor: '#ffc107'
                 }).then(() => {
-                    window.location.href = "/dashboard/lamaran/";
+                    window.location.href = "/lamaran";
                 });
             },
             onError: function(result) {
@@ -62,7 +62,7 @@
                     text: 'Terjadi kesalahan saat memproses pembayaran.',
                     confirmButtonColor: '#dc3545'
                 }).then(() => {
-                    window.location.href = "/dashboard/lamaran/";
+                    window.location.href = "/lamaran";
                 });
             }
         });

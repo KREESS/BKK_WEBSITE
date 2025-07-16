@@ -102,7 +102,7 @@
 
                     <li class="sidebar-header">Lainnya</li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="/dashboard/profil/">
+                        <a class="sidebar-link" href="/profil">
                             <i class="bi bi-book"></i> <span class="align-middle">Profil</span>
                         </a>
                     </li>

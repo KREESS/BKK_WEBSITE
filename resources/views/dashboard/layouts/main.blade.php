@@ -77,7 +77,7 @@
                         <li class="sidebar-header">
                             Lainnya
                         </li>
-                        <a class="sidebar-link" href="/dashboard/profil/">
+                        <a class="sidebar-link" href="/profil">
                             <i class="bi bi-book"></i> <span class="align-middle">Profil</span>
                         </a>
                         <li class="sidebar-item">
