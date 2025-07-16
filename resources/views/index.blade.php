@@ -93,10 +93,10 @@
 </div> {{-- Penutup #container --}}
 
         {{-- INI LIVE SEARCHNYA --}}
-        <form id="formSearch" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+        {{-- <form id="formSearch" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
           <input type="text" id="searchLowongan" class="form-control" placeholder="Cari Lowongan...">
           <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+        </form> --}}
 
 {{-- SCRIPT LIVE SEARCH --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
