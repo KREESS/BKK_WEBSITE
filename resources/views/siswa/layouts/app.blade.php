@@ -131,18 +131,18 @@
                                 <i class="align-middle" data-feather="settings"></i>
                             </a>
 
-                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
-                                data-bs-toggle="dropdown">
-                                @if (auth()->user()->foto)
-                                    <img src="{{ asset('storage/' . $users->foto) }}"
-                                        class="avatar img-fluid rounded me-1" alt="User" /> <span
-                                        class="text-dark">{{ auth()->user()->name }}</span>
-                                @else
-                                    <img src="/dashboardassets/img/avatars/avatar.png"
-                                        class="avatar img-fluid rounded me-1" alt="User" /> <span
-                                        class="text-dark">{{ auth()->user()->name }}</span>
-                                @endif
-                            </a>
+<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+    @if (auth()->user()->foto)
+        <img src="{{ asset('storage/' . auth()->user()->foto) }}"
+            class="avatar img-fluid rounded me-1" alt="User" />
+        <span class="text-dark">{{ auth()->user()->name }}</span>
+    @else
+        <img src="/dashboardassets/img/avatars/avatar.png"
+            class="avatar img-fluid rounded me-1" alt="User" />
+        <span class="text-dark">{{ auth()->user()->name }}</span>
+    @endif
+</a>
+
                             <div class="dropdown-menu dropdown-menu-end">
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
